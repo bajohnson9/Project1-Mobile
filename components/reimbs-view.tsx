@@ -1,60 +1,93 @@
 import { useEffect } from "react"
 import { useState } from "react"
-import { StyleSheet, FlatList, Text, View, TouchableOpacity } from "react-native"
-import { ReimbursementItem, ReimbursementStatus } from "../dtos/dtos"
+import { StyleSheet, FlatList, Text, View, TouchableOpacity, Button } from "react-native"
+import { ReimbursementItem, ReimbursementStatus, User } from "../dtos/dtos"
 import axios from "axios"
+import Dropdown from "./reimbs-dropdown"
+import MgrFunctions from "./mgr-functions"
+import ReimbCreator from "./reimb-creator"
 
-export default function ReimbsView(){
+export default function ReimbsView(props:{setUser:Function}){
     const [reimbs, setReimbs] = useState<ReimbursementItem[]>([])
+    const [selected, setSelected] = useState(undefined);
+    const data = reimbToData(reimbs)
 
     async function getReimbs(){
-        const response = await axios.get("http://localhost:5000/reimbs")
+        const response = await axios.get("https://project1-backend-final.azurewebsites.net/reimbs")
             const fetchedReimbs = response.data;
             setReimbs(fetchedReimbs);
+    }
+
+    function reimbToData(reimbs:ReimbursementItem[]){
+        //take in reimbursement array, return {label: string; reimb:ReimbursementItem}
+        const tempData:{label:string;reimb:ReimbursementItem}[] = []
+        for(let r of reimbs){
+            //value:string? or html? FUCK THAT, ITS JUST A REIMB
+            const rLabel:string = (`${r.type}: ${r.desc}`);
+            const rReimb = r;
+
+            tempData.push({label:rLabel,reimb:rReimb})
+        }
+        return tempData;
     }
 
     useEffect(()=>{
         //update reimbs whenever useEffect
         getReimbs();
-    }, [])
+    }, [reimbs])
 
+    async function logout(){
+        const tempUser:User = {username:'',password:'',id:'',isAuthenticated:false,isManager:false,reimbs:[]};
+        //console.log(tempUser)
+        const response = await axios.patch("https://project1-backend-final.azurewebsites.net/login",tempUser);
+        props.setUser(response.data);
+    }
 
-    return(<View>
-        <FlatList 
-            data={reimbs} 
-            renderItem={({item}) =>Reimb(item)} 
-            keyExtractor={item => item.id}
-            ItemSeparatorComponent={() => (
-                <View style={{height:1,backgroundColor:'#333333'}}></View>)}>
-            </FlatList>
-    </View>)
+    return(<>
+        <View>
+            <Button color={'#30634a'} onPress={logout} title="Log Out"/>
+            <View/>
+            <View style={styles.container}>
+                {!!selected && (<>
+
+                {/* make this a modal :o) */}
+                <Text>Selected Reimbursement:{selected.reimb.desc}</Text>
+                <Text>Type: {selected.reimb.type} | Amount: {selected.reimb.amount}</Text>
+                <Text>Status: {selected.reimb.status}</Text>
+
+                <MgrFunctions 
+                    reimb={selected.reimb}
+                    reimbs={reimbs} 
+                    updateReimbs={setReimbs}
+                />
+            </>)}   
+            <Dropdown label="Select Item" data={data} onSelect={setSelected}/>
+        </View>
+    </View>
+        <View style={styles.form}>
+            <ReimbCreator  reimbs={reimbs} updateReimbs={setReimbs}/>
+        </View>
+    </>)
 }
-
-function Reimb(props:ReimbursementItem){
-    return(<View><TouchableOpacity>
-        <Text>Type: {props.type} {/*Description: {props.desc}*/} Amount: {props.amount} </Text>
-        <Text> Status: {props.status} ID: {props.id} </Text>
-    </TouchableOpacity></View>)
-
-}
-
-function ReimbAdder(){
-    return(<View>
-        <Text>Type</Text>
-
-    </View>)
-}
-
 
 const styles = StyleSheet.create({
     container: {
-      flex: 1,
-      backgroundColor: '#ffeeff',
+      flex: .2,
+      backgroundColor: '#eeeeff',
       alignItems: 'center',
       justifyContent: 'center',
-      marginTop: "10%",
-      paddingRight: 20,
+      marginTop: "3%",
+      paddingRight: 5,
+      paddingLeft: 5,
       
+    },
+    form: {
+        flex:1,
+        backgroundColor:'#ffeeee',
+        alignItems: 'center',
+        justifyContent: 'flex-start',
+        paddingLeft:20,
+
     }
   });
   

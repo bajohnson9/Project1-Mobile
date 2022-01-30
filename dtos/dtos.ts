@@ -21,3 +21,7 @@ export interface User {
     isManager:boolean,
     reimbs: string[]
 }
+export interface AddRequest{
+    user:User;
+    reimb:ReimbursementItem;
+}

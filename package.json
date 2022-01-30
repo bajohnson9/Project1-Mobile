@@ -10,12 +10,16 @@
     "eject": "expo eject"
   },
   "dependencies": {
+    "@types/react-native-elements": "^0.18.0",
+    "@types/react-native-material-dropdown": "^0.11.5",
     "axios": "^0.25.0",
     "expo": "~44.0.0",
     "expo-status-bar": "~1.2.0",
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "react-native": "0.64.3",
+    "react-native-dropdown-picker": "^5.3.0",
+    "react-native-elements": "^3.4.2",
     "react-native-web": "0.17.1"
   },
   "devDependencies": {

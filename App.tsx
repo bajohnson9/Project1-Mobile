@@ -10,14 +10,14 @@ export default function App() {
   return (
     <View style={styles.container}>
 
-      <Text>Welcome to the Manager App!</Text>
+      <Text style={styles.heading}>⚡🔥🛹🔥⚡Welcome to...⚡🔥🚀🔥⚡</Text>
+      <Text> XTREME REIMBURSEMENT DISPERSEMENT </Text>
+
+      <Text/><Text/><Text/><Text/>
       {!user.username ? <LoginView user={user} setUser={setUser} /> : <View>
         <Text>Logged in as {user.username}</Text>
-        <ReimbsView/>
+        <ReimbsView setUser={setUser}/>
         </View>}
-      
-      
-      
       
       <StatusBar style="auto" />
     </View>
@@ -29,8 +29,13 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    flexDirection: 'column',
     marginTop: "10%",
     paddingRight: 20,
+    backgroundColor: '#eeffee',
+    overflow: 'scroll',
+  },
+  heading: {
     
   }
 });

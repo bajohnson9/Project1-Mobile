@@ -5,39 +5,30 @@ import { ReimbursementItem, ReimbursementStatus, User } from "../dtos/dtos"
 import axios from "axios"
 
 export default function LoginView(props:{user:User,setUser:Function}){
-    const [un, setUn] = useState('');
-    const [pw, setPw] = useState('');
+    const [un, setUn] = useState(null);
+    const [pw, setPw] = useState(null);
     
 
     async function login(){
         const tempUser:User = {username:un,password:pw,id:'',isAuthenticated:false,isManager:false,reimbs:[]};
         //console.log(tempUser)
-        const response = await axios.patch("http://localhost:5000/login",tempUser);
+        const response = await axios.patch("https://project1-backend-final.azurewebsites.net/login",tempUser);
         props.setUser(response.data);
-        console.log(props.user)
-    }
-
-    function getUsername(){
-        return props.user.username;
     }
 
     useEffect(()=>{
         //update reimbs whenever useEffect
         login();
-        console.log(un)
     }, [])
 
 
     return(<View>
         <Text>Username:</Text>
         <TextInput style={{backgroundColor:'#ffeeff'}} onChangeText={t=>setUn(t)}></TextInput>
-
         <Text>Password:</Text>
         <TextInput style={{backgroundColor:'#ffeeff'}} onChangeText={t=>setPw(t)}></TextInput>
 
         <Button onPress={login} title={"Login"}/>
-
-        
 
     </View>)
 }
@@ -50,8 +41,7 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       justifyContent: 'center',
       marginTop: "10%",
-      paddingRight: 20,
-      
+      paddingRight: 20    
     }
   });
   
