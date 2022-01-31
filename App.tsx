@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
-import { ImageProps, StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import LoginView from './components/login-view';
 import ReimbsView from './components/reimbs-view';
 
@@ -32,10 +32,4 @@ const styles = StyleSheet.create({
     backgroundColor: '#eeffee',
     overflow: 'scroll',
   },
-  heading: {
-    
-  },
-  headingImg: {
-
-  }
 });

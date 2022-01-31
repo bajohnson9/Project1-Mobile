@@ -1,6 +1,6 @@
 import { useState } from "react"
-import { StyleSheet, FlatList, Text, View, TouchableOpacity, TextInput, Button } from "react-native"
-import { AddRequest, ReimbursementItem, ReimbursementStatus, User } from "../dtos/dtos"
+import { StyleSheet, Text, View, TextInput, Button } from "react-native"
+import { AddRequest, ReimbursementItem, ReimbursementStatus } from "../dtos/dtos"
 import axios from "axios"
 
 export default function ReimbCreator(props:{reimbs:ReimbursementItem[], updateReimbs:Function}){
@@ -42,7 +42,6 @@ export default function ReimbCreator(props:{reimbs:ReimbursementItem[], updateRe
     
 
     return(<View style={styles.creatorView}>
-        
         <Text>Type:</Text>
         <TextInput style={styles.textBox} onChangeText={t=>setType(t)}></TextInput>
         <Text>Description:</Text>
@@ -60,21 +59,22 @@ export default function ReimbCreator(props:{reimbs:ReimbursementItem[], updateRe
 
 const styles = StyleSheet.create({
     creatorView: {
-      flex: .3,
+      flex: 1,
       flexDirection: 'column',
       backgroundColor: '#ffeeff',
-      alignItems: 'center',
+      
       justifyContent: 'space-between',
       marginTop: "2%",
       marginBottom: "2%",
-      marginLeft: "25%",
+      marginLeft: "2%",
       marginRight: "2%",
       paddingRight: 200,
-
+      alignItems: 'stretch'
     },
     textBox: {
-        width:'100%',
-        backgroundColor:'#eeffee'
+        flex:1,
+        backgroundColor:'#eeffee',
+        alignItems: 'stretch',
     }
   });
   

@@ -1,7 +1,7 @@
 import { useEffect } from "react"
 import { useState } from "react"
-import { StyleSheet, FlatList, Text, View, TouchableOpacity, Button } from "react-native"
-import { ReimbursementItem, ReimbursementStatus, User } from "../dtos/dtos"
+import { StyleSheet, Text, View, Button } from "react-native"
+import { ReimbursementItem, User } from "../dtos/dtos"
 import axios from "axios"
 import Dropdown from "./reimbs-dropdown"
 import MgrFunctions from "./mgr-functions"
@@ -44,7 +44,9 @@ export default function ReimbsView(props:{setUser:Function}){
     }
 
     return(<>
+        <Button color={'#30634a'} onPress={logout} title="Log Out"/>
         <View>
+            
             
             <View/>
             <View style={styles.container}>
@@ -55,13 +57,14 @@ export default function ReimbsView(props:{setUser:Function}){
                 <Text>Type: {selected.reimb.type} | Amount: {selected.reimb.amount}</Text>
                 <Text>Status: {selected.reimb.status}</Text>
 
-                <MgrFunctions 
+                
+            </>)}   
+            <Dropdown label="Select Item" data={data} onSelect={setSelected}/>
+            <MgrFunctions 
                     reimb={selected.reimb}
                     reimbs={reimbs} 
                     updateReimbs={setReimbs}
                 />
-            </>)}   
-            <Dropdown label="Select Item" data={data} onSelect={setSelected}/>
         </View>
     </View>
         <View style={styles.form}>
@@ -89,6 +92,7 @@ const styles = StyleSheet.create({
 
     },
     logout: {
+        flex:1,
         position: "absolute",
         top: 0,
         left: 0
