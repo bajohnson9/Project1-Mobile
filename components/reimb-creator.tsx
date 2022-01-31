@@ -60,17 +60,20 @@ export default function ReimbCreator(props:{reimbs:ReimbursementItem[], updateRe
 
 const styles = StyleSheet.create({
     creatorView: {
-      flex: 1,
+      flex: .3,
       flexDirection: 'column',
       backgroundColor: '#ffeeff',
       alignItems: 'center',
       justifyContent: 'space-between',
-      marginTop: "10%",
-      paddingRight: 20,
+      marginTop: "2%",
+      marginBottom: "2%",
+      marginLeft: "25%",
+      marginRight: "2%",
+      paddingRight: 200,
 
     },
     textBox: {
-        flex: 0,
+        width:'100%',
         backgroundColor:'#eeffee'
     }
   });

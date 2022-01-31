@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
       backgroundColor: '#fff',
       alignItems: 'center',
       justifyContent: 'space-between',
-      marginTop: "10%",
+      marginTop: "3%",
       
       paddingHorizontal: 10,
       

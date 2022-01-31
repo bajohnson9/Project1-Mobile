@@ -45,13 +45,13 @@ export default function ReimbsView(props:{setUser:Function}){
 
     return(<>
         <View>
-            <Button color={'#30634a'} onPress={logout} title="Log Out"/>
+            
             <View/>
             <View style={styles.container}>
                 {!!selected && (<>
 
                 {/* make this a modal :o) */}
-                <Text>Selected Reimbursement:{selected.reimb.desc}</Text>
+                <Text>Selected Reimb.: {selected.reimb.desc}</Text>
                 <Text>Type: {selected.reimb.type} | Amount: {selected.reimb.amount}</Text>
                 <Text>Status: {selected.reimb.status}</Text>
 
@@ -82,12 +82,16 @@ const styles = StyleSheet.create({
       
     },
     form: {
-        flex:1,
+        flex:.1,
         backgroundColor:'#ffeeee',
         alignItems: 'center',
-        justifyContent: 'flex-start',
-        paddingLeft:20,
+        justifyContent: 'center',
 
+    },
+    logout: {
+        position: "absolute",
+        top: 0,
+        left: 0
     }
   });
   

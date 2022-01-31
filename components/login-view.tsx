@@ -23,6 +23,9 @@ export default function LoginView(props:{user:User,setUser:Function}){
 
 
     return(<View>
+        <Text>⚡🔥🛹🔥⚡Welcome to...⚡🔥🚀🔥⚡</Text>
+        <Text>XTREME Reimbursement Dispersement</Text>
+
         <Text>Username:</Text>
         <TextInput style={{backgroundColor:'#ffeeff'}} onChangeText={t=>setUn(t)}></TextInput>
         <Text>Password:</Text>
